@@ -333,57 +333,7 @@ class MaskPointCloudPublisher:
             mapped_x, mapped_y, mapped_z = z, x, -y
             rospy.loginfo(f"轴映射后坐标: {mapped_x:.3f}, {mapped_y:.3f}, {mapped_z:.3f}")
             
-            # # TF变换（传入角度为30度）
-            # coord = self.TF((mapped_x, mapped_y, mapped_z), alpha_deg=30)
-            # if coord is None:
-            #     continue
             
-            # # z值滤波
-            # filtered_z = self.filter_z(coord)
-            # coord = (coord[0], coord[1], filtered_z)  # 修正元组不可变问题
-            # rospy.loginfo(f"TF变换+滤波后坐标: {coord[0]:.3f}, {coord[1]:.3f}, {coord[2]:.3f}")
-            
-            # 串口发送（可选开启）
-            # self.serial_pub(coord)
-            
-            rate.sleep()
-#     # ------------------------------
-# # numpy 图像 → 转成 RealSense 原生 frame
-# # ------------------------------
-# def numpy_to_color_frame(color_image):
-#     # color_image: numpy array (H, W, 3), uint8
-#     h, w = color_image.shape[:2]
-#     frame = rs.video_frame()
-#     profile = rs.video_stream_profile()
-
-#     # 创建frame
-#     vf = rs.rs2video_frame()
-#     vf.width = w
-#     vf.height = h
-#     vf.bpp = 24
-#     vf.fmt = rs.format.rgb8
-#     vf.stride = w * 3
-
-#     # 把numpy数据拷贝进frame
-#     data = color_image.tobytes()
-#     vf.data = data
-#     frame = rs.video_frame(vf)
-#     return frame
-
-# def numpy_to_depth_frame(depth_image):
-#     # depth_image: numpy array (H, W), uint16
-#     h, w ,_= depth_image.shape
-#     frame = rs.video_frame()
-#     vf = rs.rs2video_frame()
-#     vf.width = w
-#     vf.height = h
-#     vf.bpp = 16
-#     vf.fmt = rs.format.z16
-#     vf.stride = w * 2
-#     data = depth_image.tobytes()
-#     vf.data = data
-#     frame = rs.video_frame(vf)
-#     return frame
 
 
 if __name__ == "__main__":
